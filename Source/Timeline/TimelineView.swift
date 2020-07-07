@@ -264,12 +264,12 @@ public final class TimelineView: UIView {
     }
 
     if isToday {
-      let minuteValue = component(component: .minute, from: currentTime)
-      let hourValue = component(component: .hour, from: currentTime)
-      if minuteValue > 39 {
-        hourToRemoveIndex = hourValue + 1
-      } else if minuteValue < 21 {
-        hourToRemoveIndex = hourValue
+      let minute = component(component: .minute, from: currentTime)
+      let hour = component(component: .hour, from: currentTime)
+      if minute > 39 {
+        hourToRemoveIndex = hour + 1
+      } else if minute < 21 {
+        hourToRemoveIndex = hour
       }
     }
 
@@ -473,31 +473,31 @@ public final class TimelineView: UIView {
       dayOffset -= 1
     }
     let fullTimelineHeight = 24 * style.verticalDiff
-    let hourValue = component(component: .hour, from: date)
-    let minuteValue = component(component: .minute, from: date)
-    let hourY = CGFloat(hourValue) * style.verticalDiff + style.verticalInset
-    let minuteY = CGFloat(minuteValue) * style.verticalDiff / 60
+    let hour = component(component: .hour, from: date)
+    let minute = component(component: .minute, from: date)
+    let hourY = CGFloat(hour) * style.verticalDiff + style.verticalInset
+    let minuteY = CGFloat(minute) * style.verticalDiff / 60
     return hourY + minuteY + fullTimelineHeight * dayOffset
   }
 
   public func yToDate(_ y: CGFloat) -> Date {
     let timeValue = y - style.verticalInset
-    var hourValue = Int(timeValue / style.verticalDiff)
-    let fullHourPoints = CGFloat(hourValue) * style.verticalDiff
+    var hour = Int(timeValue / style.verticalDiff)
+    let fullHourPoints = CGFloat(hour) * style.verticalDiff
     let minuteDiff = timeValue - fullHourPoints
-    let minuteValue = Int(minuteDiff / style.verticalDiff * 60)
+    let minute = Int(minuteDiff / style.verticalDiff * 60)
     var dayOffset = 0
-    if hourValue > 23 {
+    if hour > 23 {
       dayOffset += 1
-      hourValue -= 24
-    } else if hourValue < 0 {
+      hour -= 24
+    } else if hour < 0 {
       dayOffset -= 1
-      hourValue += 24
+      hour += 24
     }
     let offsetDate = calendar.date(byAdding: DateComponents(day: dayOffset),
                                    to: date)!
-    let newDate = calendar.date(bySettingHour: hourValue,
-                                minute: minuteValue.clamped(to: 0...59),
+    let newDate = calendar.date(bySettingHour: hour,
+                                minute: minute.clamped(to: 0...59),
                                 second: 0,
                                 of: offsetDate)
     return newDate!
@@ -510,8 +510,8 @@ public final class TimelineView: UIView {
   private func getDateInterval(date: Date) -> TimePeriod {
     let earliestEventMintues = component(component: .minute, from: date)
     let splitMinuteInterval = style.splitMinuteInterval
-    let minuteValue = component(component: .minute, from: date)
-    let minuteRange = (minuteValue / splitMinuteInterval) * splitMinuteInterval
+    let minute = component(component: .minute, from: date)
+    let minuteRange = (minute / splitMinuteInterval) * splitMinuteInterval
     let beginningRange = calendar.date(byAdding: .minute, value: -(earliestEventMintues - minuteRange), to: date)!
     let endRange = calendar.date(byAdding: .minute, value: splitMinuteInterval, to: beginningRange)
     return TimePeriod.init(beginning: beginningRange, end: endRange)

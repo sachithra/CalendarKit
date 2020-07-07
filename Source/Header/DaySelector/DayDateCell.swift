@@ -83,8 +83,8 @@ public final class DayDateCell: UIView, DaySelectorItemProtocol {
   }
 
   private func isAWeekend(date: Date) -> Bool {
-    let weekdayValue = component(component: .weekday, from: date)
-    if weekdayValue == 7 || weekdayValue == 1 {
+    let weekday = component(component: .weekday, from: date)
+    if weekday == 7 || weekday == 1 {
       return true
     }
     return false

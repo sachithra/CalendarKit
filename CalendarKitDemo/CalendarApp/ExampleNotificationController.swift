@@ -42,7 +42,7 @@ class ExampleNotificationController: UIViewController {
     let size = CGSize(width: view.bounds.width, height: 140)
     let origin = CGPoint(x: 0, y: view.bounds.height/2)
     timelineContainer.frame = CGRect(origin: origin, size: size)
-    timelineContainer.scrollTo(hour24: Float(max(Date().hourValue - 1, 0)))
+    timelineContainer.scrollTo(hour24: Float(max(Date().hour - 1, 0)))
     
     timelineContainer.layer.cornerRadius = 25
   }
