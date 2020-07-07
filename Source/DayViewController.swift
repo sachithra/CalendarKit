@@ -73,7 +73,7 @@ open class DayViewController: UIViewController, EventDataSource, DayViewDelegate
   }
 
   open func eventsForDate(_ date: Date) -> [EventDescriptor] {
-    return [Event]()
+    return [CalendarEvent]()
   }
 
   // MARK: - DayViewDelegate

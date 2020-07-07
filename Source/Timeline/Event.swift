@@ -1,7 +1,7 @@
 #if os(iOS)
 import UIKit
 
-public final class Event: EventDescriptor {
+public final class CalendarEvent: EventDescriptor {
   public var startDate = Date()
   public var endDate = Date()
   public var isAllDay = false
@@ -24,8 +24,8 @@ public final class Event: EventDescriptor {
 
   public init() {}
 
-  public func makeEditable() -> Event {
-    let cloned = Event()
+  public func makeEditable() -> CalendarEvent {
+    let cloned = CalendarEvent()
     cloned.startDate = startDate
     cloned.endDate = endDate
     cloned.isAllDay = isAllDay
