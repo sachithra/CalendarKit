@@ -58,6 +58,7 @@ class CustomCalendarExampleController: DayViewController, DatePickerControllerDe
   override func loadView() {
     calendar = customCalendar
     dayView = DayView(calendar: calendar)
+    dayView.isHeaderViewVisible = false
     view = dayView
   }
   
@@ -151,10 +152,10 @@ class CustomCalendarExampleController: DayViewController, DatePickerControllerDe
   
   private func generateEventsForDate(_ date: Date) -> [EventDescriptor] {
     var workingDate = date.add(TimeChunk.dateComponents(hours: Int(arc4random_uniform(10) + 5)))
-    var events = [Event]()
+    var events = [CalendarEvent]()
     
     for i in 0...4 {
-      let event = Event()
+      let event = CalendarEvent()
       let duration = Int(arc4random_uniform(160) + 60)
       let datePeriod = TimePeriod(beginning: workingDate,
                                   chunk: TimeChunk.dateComponents(minutes: duration))
@@ -201,14 +202,14 @@ class CustomCalendarExampleController: DayViewController, DatePickerControllerDe
   private var createdEvent: EventDescriptor?
   
   override func dayViewDidSelectEventView(_ eventView: EventView) {
-    guard let descriptor = eventView.descriptor as? Event else {
+    guard let descriptor = eventView.descriptor as? CalendarEvent else {
       return
     }
     print("Event has been selected: \(descriptor) \(String(describing: descriptor.userInfo))")
   }
   
   override func dayViewDidLongPressEventView(_ eventView: EventView) {
-    guard let descriptor = eventView.descriptor as? Event else {
+    guard let descriptor = eventView.descriptor as? CalendarEvent else {
       return
     }
     endEventEditing()
@@ -247,7 +248,7 @@ class CustomCalendarExampleController: DayViewController, DatePickerControllerDe
   private func generateEventNearDate(_ date: Date) -> EventDescriptor {
     let duration = Int(arc4random_uniform(160) + 60)
     let startDate = date.subtract(TimeChunk.dateComponents(minutes: Int(CGFloat(duration) / 2)))
-    let event = Event()
+    let event = CalendarEvent()
     let datePeriod = TimePeriod(beginning: startDate,
                                 chunk: TimeChunk.dateComponents(minutes: duration))
     event.startDate = datePeriod.beginning!

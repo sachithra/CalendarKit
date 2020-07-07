@@ -20,7 +20,7 @@ class ExampleNotificationController: UIViewController {
     timelineContainer.timeline.date = Date()
     
     let date = Date()
-    let event = Event()
+    let event = CalendarEvent()
     let duration = 80
     let datePeriod = TimePeriod(beginning: date,
                                 chunk: TimeChunk.dateComponents(minutes: duration))

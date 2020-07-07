@@ -105,10 +105,10 @@ class ExampleController: DayViewController, DatePickerControllerDelegate {
 
   override func eventsForDate(_ date: Date) -> [EventDescriptor] {
     var date = date.add(TimeChunk.dateComponents(hours: Int(arc4random_uniform(10) + 5)))
-    var events = [Event]()
+    var events = [CalendarEvent]()
 
     for i in 0...4 {
-      let event = Event()
+      let event = CalendarEvent()
       let duration = Int(arc4random_uniform(160) + 60)
       let datePeriod = TimePeriod(beginning: date,
                                   chunk: TimeChunk.dateComponents(minutes: duration))
@@ -151,14 +151,14 @@ class ExampleController: DayViewController, DatePickerControllerDelegate {
   // MARK: DayViewDelegate
 
   override func dayViewDidSelectEventView(_ eventView: EventView) {
-    guard let descriptor = eventView.descriptor as? Event else {
+    guard let descriptor = eventView.descriptor as? CalendarEvent else {
       return
     }
     print("Event has been selected: \(descriptor) \(String(describing: descriptor.userInfo))")
   }
 
   override func dayViewDidLongPressEventView(_ eventView: EventView) {
-    guard let descriptor = eventView.descriptor as? Event else {
+    guard let descriptor = eventView.descriptor as? CalendarEvent else {
       return
     }
     print("Event has been longPressed: \(descriptor) \(String(describing: descriptor.userInfo))")
