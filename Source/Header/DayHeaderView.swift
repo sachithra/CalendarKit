@@ -73,12 +73,12 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
   }
   
   private func beginningOfWeek(_ date: Date) -> Date {
-    let weekOfYearValue = component(component: .weekOfYearValue, from: date)
-    let yearForWeekOfYearValue = component(component: .yearForWeekOfYearValue, from: date)
+    let weekOfYearValue = component(component: .weekOfYear, from: date)
+    let yearForWeekOfYearValue = component(component: .yearForWeekOfYear, from: date)
     return calendar.date(from: DateComponents(calendar: calendar,
-                                              weekdayValue: calendar.firstWeekday,
-                                              weekOfYearValue: weekOfYearValue,
-                                              yearForWeekOfYearValue: yearForWeekOfYearValue))!
+                                              weekday: calendar.firstWeekday,
+                                              weekOfYear: weekOfYearValue,
+                                              yearForWeekOfYear: yearForWeekOfYearValue))!
   }
 
   private func component(component: Calendar.Component, from date: Date) -> Int {

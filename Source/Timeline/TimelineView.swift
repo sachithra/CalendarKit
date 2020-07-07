@@ -264,8 +264,8 @@ public final class TimelineView: UIView {
     }
 
     if isToday {
-      let minuteValue = component(component: .minuteValue, from: currentTime)
-      let hourValue = component(component: .hourValue, from: currentTime)
+      let minuteValue = component(component: .minute, from: currentTime)
+      let hourValue = component(component: .hour, from: currentTime)
       if minuteValue > 39 {
         hourToRemoveIndex = hourValue + 1
       } else if minuteValue < 21 {
@@ -473,8 +473,8 @@ public final class TimelineView: UIView {
       dayOffset -= 1
     }
     let fullTimelineHeight = 24 * style.verticalDiff
-    let hourValue = component(component: .hourValue, from: date)
-    let minuteValue = component(component: .minuteValue, from: date)
+    let hourValue = component(component: .hour, from: date)
+    let minuteValue = component(component: .minute, from: date)
     let hourY = CGFloat(hourValue) * style.verticalDiff + style.verticalInset
     let minuteY = CGFloat(minuteValue) * style.verticalDiff / 60
     return hourY + minuteY + fullTimelineHeight * dayOffset
@@ -494,11 +494,11 @@ public final class TimelineView: UIView {
       dayOffset -= 1
       hourValue += 24
     }
-    let offsetDate = calendar.date(byAdding: DateComponents(dayValue: dayOffset),
+    let offsetDate = calendar.date(byAdding: DateComponents(day: dayOffset),
                                    to: date)!
     let newDate = calendar.date(bySettingHour: hourValue,
-                                minuteValue: minuteValue.clamped(to: 0...59),
-                                secondValue: 0,
+                                minute: minuteValue.clamped(to: 0...59),
+                                second: 0,
                                 of: offsetDate)
     return newDate!
   }
@@ -508,12 +508,12 @@ public final class TimelineView: UIView {
   }
   
   private func getDateInterval(date: Date) -> TimePeriod {
-    let earliestEventMintues = component(component: .minuteValue, from: date)
+    let earliestEventMintues = component(component: .minute, from: date)
     let splitMinuteInterval = style.splitMinuteInterval
-    let minuteValue = component(component: .minuteValue, from: date)
+    let minuteValue = component(component: .minute, from: date)
     let minuteRange = (minuteValue / splitMinuteInterval) * splitMinuteInterval
-    let beginningRange = calendar.date(byAdding: .minuteValue, value: -(earliestEventMintues - minuteRange), to: date)!
-    let endRange = calendar.date(byAdding: .minuteValue, value: splitMinuteInterval, to: beginningRange)
+    let beginningRange = calendar.date(byAdding: .minute, value: -(earliestEventMintues - minuteRange), to: date)!
+    let endRange = calendar.date(byAdding: .minute, value: splitMinuteInterval, to: beginningRange)
     return TimePeriod.init(beginning: beginningRange, end: endRange)
   }
 }

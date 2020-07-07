@@ -54,7 +54,7 @@ public final class DateLabel: UILabel, DaySelectorItemProtocol {
   }
 
   func updateState() {
-    text = String(component(component: .dayValue, from: date))
+    text = String(component(component: .day, from: date))
     let today = isToday
     if selected {
       font = style.todayFont
@@ -73,7 +73,7 @@ public final class DateLabel: UILabel, DaySelectorItemProtocol {
   }
 
   private func isAWeekend(date: Date) -> Bool {
-    let weekdayValue = component(component: .weekdayValue, from: date)
+    let weekdayValue = component(component: .weekday, from: date)
     if weekdayValue == 7 || weekdayValue == 1 {
       return true
     }
