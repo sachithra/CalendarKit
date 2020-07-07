@@ -74,7 +74,7 @@ public final class DayDateCell: UIView, DaySelectorItemProtocol {
     let weekendMask = [true] + [Bool](repeating: false, count: 5) + [true]
     var weekDays = Array(zip(daySymbols, weekendMask))
     weekDays.shift(calendar.firstWeekday - 1)
-    let weekDay = component(component: .weekday, from: date)
+    let weekDay = component(component: .weekdayValue, from: date)
     dayLabel.text = daySymbols[weekDay - 1]
   }
 
@@ -83,8 +83,8 @@ public final class DayDateCell: UIView, DaySelectorItemProtocol {
   }
 
   private func isAWeekend(date: Date) -> Bool {
-    let weekday = component(component: .weekday, from: date)
-    if weekday == 7 || weekday == 1 {
+    let weekdayValue = component(component: .weekdayValue, from: date)
+    if weekdayValue == 7 || weekdayValue == 1 {
       return true
     }
     return false

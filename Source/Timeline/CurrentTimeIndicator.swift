@@ -71,8 +71,8 @@ import UIKit
   private func configureTimer() {
     timer?.invalidate()
     let date = Date()
-    var components = calendar.dateComponents(Set([.era, .year, .month, .day, .hour, .minute]), from: date)
-    components.minute! += 1
+    var components = calendar.dateComponents(Set([.eraValue, .yearValue, .monthValue, .dayValue, .hourValue, .minuteValue]), from: date)
+    components.minuteValue! += 1
     let timerDate = calendar.date(from: components)!
     timer = Timer(fireAt: timerDate,
                   interval: 60,
